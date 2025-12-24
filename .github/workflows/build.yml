@@ -10,9 +10,9 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
     - name: Check out repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Set up .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '7.0.x'
     - name: Build solution
