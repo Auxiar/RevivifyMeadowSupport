@@ -29,13 +29,13 @@ sealed class Options : OptionInterface
     {
         base.Initialize();
 
-        Tabs = new OpTab[] { new OpTab(this) };
+        Tabs = new OpTab[] { new OpTab(this, "") };
 
         float sliderX = 270;
         float y = 390;
 
         var author = new OpLabel(20, 600 - 40, "Original by Dual, Proximity by Daimyo, Combination/Update by Auxiar Molkhun", true);
-        var github = new OpLabel(20, 600 - 40 - 40, "github.com/Auxiar/Revivify_MeadowFix", false);
+        var github = new OpLabel(20, 600 - 40 - 40, "github.com/Auxiar/Revivify_MeadowFix");
 
         var d1 = new OpLabel(new(220, y), Vector2.zero, "Revive speed multiplier", FLabelAlignment.Right);
         var s1 = new OpFloatSlider(ReviveSpeed, new Vector2(sliderX, y - 6), 300, decimalNum: 1);
@@ -58,6 +58,24 @@ sealed class Options : OptionInterface
         var d7 = new OpLabel(new Vector2(220f, y -= 60f), Vector2.zero, "Distance to revive (60f = spear length)", FLabelAlignment.Right);
         var s7 = new OpFloatSlider(ReviveDistance, new Vector2(sliderX, y - 6), 300, decimalNum: 1);
 
-        Tabs[0].AddItems(author, github, d1, s1, d2, s2, d3, s3, d4, s4, d5, s5, d6, s6, d7, s7);
+        Tabs[0].AddItems(new UIelement[]
+            {
+                author,
+                github,
+                d1,
+                s1,
+                d2,
+                s2,
+                d3,
+                s3,
+                d4,
+                s4,
+                d5,
+                s5,
+                d6,
+                s6,
+                d7,
+                s7
+            });
     }
 }
