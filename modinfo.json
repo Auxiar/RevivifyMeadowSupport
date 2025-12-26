@@ -3,7 +3,7 @@
   "name": "Revivify - Meadow Fix",
   "version": "1.0.0",
   "authors": "Dual, Daimyo, & Auxiar Molkhun",
-  "description": "Makes Dual's Original Revivify mod compatible with Rain Meadow while implementing Daimyo's proximity-based revivify as an option.<LINE>new art by [ARTIST], source code at: github.com/Auxiar/RevivifyMeadowFix <LINE><LINE> Original Revivify Description: <LINE>Revive slugcat and slugpup corpses, in co-op or not! Lay your friend flat on a solid floor and rhythmically tap GRAB twice per second to resuscitate them. Returning from death's door is an ordeal, so take care of them afterwards.<LINE><LINE>Configurable. Art by twitter.com/GarbageWastes and [original] code at github.com/Dual-Iron/revivify",
+  "description": "Makes Dual's Original Revivify mod compatible with Rain Meadow and combines Daimyo's Proximity-based Revivify as an option for easy method switching. Art by me (Auxiar)<LINE> source code at: github.com/Auxiar/RevivifyMeadowFix <LINE><LINE> Original Revivify Description: <LINE>Revive slugcat and slugpup corpses, in co-op or not! Lay your friend flat on a solid floor and rhythmically tap GRAB twice per second to resuscitate them. Returning from death's door is an ordeal, so take care of them afterwards.<LINE><LINE>Configurable. Art by twitter.com/GarbageWastes and [original] code at github.com/Dual-Iron/revivify",
   "tags": [ "Accessibility", "Creatures", "Game Mechanics" ],
   "youtube_trailer_id": "2SoDvI7ciUY",
   "requirements": [],
