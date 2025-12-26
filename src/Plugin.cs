@@ -105,19 +105,33 @@ sealed class Plugin : BaseUnityPlugin
         
         // Functions dropped by Daimyo's mod:
         On.PlayerGraphics.DrawSprites += PlayerGraphics_DrawSprites;
-        //new Hook(typeof(Player).GetMethod("get_Malnourished"), getMalnourished);
+        new Hook(typeof(Player).GetMethod("get_Malnourished"), getMalnourished);
         On.Player.CanIPutDeadSlugOnBack += Player_CanIPutDeadSlugOnBack;
         On.Player.GraphicsModuleUpdated += DontMoveWhileReviving;
-        IL.Player.GrabUpdate += Player_GrabUpdate;
-        On.Player.GrabUpdate += FixHeavyCarry;
         On.Player.HeavyCarry += FixHeavyCarry;
         On.SlugcatHand.Update += SlugcatHand_Update;
+        
+        // Renamed from FixHeavyCarry to Player_GrabUpdate:
+        On.Player.GrabUpdate += Player_GrabUpdate;
+        
+        /*
+         * Dual's version of the mod used the IL hook for GrabUpdate in order to inject the CPR code to interrupt
+         * the normal corpse grab logic. However, after review with help from ChatGPT, I found that it was ultimately
+         * not needed, and the logic could be moved into the new named, Player_GrabUpdate. The reason for this change
+         * was that when using the proximity-based method, it was actually causing the corpse and player to slide ever
+         * so slightly every frame, which was extremely annoying, especially since his DontMoveWhileReviving function
+         * didn't actually work without major visual glitches as a fix. Moving the logic for this into the normal On
+         * hook solved the sliding issue, making it much more appealing.
+         */
+        //IL.Player.GrabUpdate += Deprecated_Player_GrabUpdate;
 
         /*
          * Dual's version of this hook was breaking with meadow due to meadow loading the player graphics early,
          * I'm not sure how Daimyo's fixes it, as his version gives me an error and refuses to compile (probably
          * a reference problem on my end), but this is what I tracked down as the actual problem function, removing
-         * it functionally fixes the meadow incompatibility.
+         * it functionally fixes the meadow incompatibility. It essentially controlled the face sprite that was
+         * displayed on the corpse while being revived. I've done a poor job trying to port the logic into the
+         * PlayerGraphics_DrawSprites function, but it serves its purpose and no longer breaks with Meadow.
          */
         //IL.PlayerGraphics.DrawSprites += ChangeHeadSprite;
         
@@ -140,10 +154,7 @@ sealed class Plugin : BaseUnityPlugin
         MachineConnector.SetRegisteredOI("auxiar.revivifymeadowfix", new Options());
     }
 
-    private readonly Func<Func<Player, bool>, Player, bool> getMalnourished = (orig, self) => {
-        
-        return orig.Invoke(self) || (!Options.ReviveWithProximity.Value && Data(self).deaths >= Options.DeathsUntilExhaustion.Value);
-    };
+    private readonly Func<Func<Player, bool>, Player, bool> getMalnourished = (orig, self) => orig.Invoke(self) || Data(self).deaths >= Options.DeathsUntilExhaustion.Value;
 
     private bool Player_CanIPutDeadSlugOnBack(On.Player.orig_CanIPutDeadSlugOnBack orig, Player self, Player pickUpCandidate)
     {
@@ -151,8 +162,10 @@ sealed class Plugin : BaseUnityPlugin
          * Daimyo's implementation doesn't include this at all, so as not to break meadow's default no-grabbing philosophy.
          * However, while testing, this caused comatose slugpups to not be able to be placed on the player's back, hindering
          * mobility by forcing the slugpup to be carried in both hands as what is essentially a living corpse. For Gameplay
-         * reason, I'm keeping Dual's original implementation as the default, despite it going against meadow's philosophy.
-         * I'll include it as a setting in-case players would like to disable it at the very least.
+         * reasons, I'm keeping Dual's original implementation as the default, despite it going against meadow's philosophy.
+         * I'll include it as a setting in-case players would like to disable it at the very least. When disabled, it only
+         * applies when NOT using proximity-based revival, meaning if proximity-based revive is off, then piggybacking is
+         * still allowed
          */
         if (Options.AllowCorpsePiggyback.Value)
         {
@@ -190,12 +203,9 @@ sealed class Plugin : BaseUnityPlugin
         }
     }
 
-    //private static float reviveSpeed =  1;
     private void UpdatePlr(On.Player.orig_Update orig, Player self, bool eu)
     {
         orig.Invoke(self, eu);
-
-        //reviveSpeed = Options.ReviveSpeed.Value * 3;
         
         const int ticksToDie = 40 * 30; // 30 seconds
         const int ticksToRevive = 40 * 10; // 10 seconds
@@ -221,7 +231,6 @@ sealed class Plugin : BaseUnityPlugin
 
             if (self.room?.shelterDoor != null && self.room.shelterDoor.IsClosing)
             {
-                UnityEngine.Debug.Log($"Detected that we're in a shelter with the door closing, reviving incapacitated...");
                 RevivePlayer(self);
                 death = 0;
             }
@@ -253,15 +262,16 @@ sealed class Plugin : BaseUnityPlugin
                          */
                         
                         // If the player can be revived (^) start countdown to revival
-                        death -= 1f / (ticksToRevive * Options.ReviveSpeed.Value);
-                        UnityEngine.Debug.Log($"Thing is being revived with value: {death}");
+                        death -= 1f / (ticksToRevive * (1f / Options.ReviveSpeed.Value));
+                        //UnityEngine.Debug.Log($"Thing is being revived with value: {death}");
                         
                         // If countdown completes, revive player
                         if (death <= -1f)
                         {
                             RevivePlayer(self);
-                            UnityEngine.Debug.Log($"Revived thing with death value at: {death}");
+                            //UnityEngine.Debug.Log($"Revived thing with death value at: {death}");
                     
+                            // automatically throw held revived thing
                             if (self.grabbedBy.FirstOrDefault()?.grabber is Player p) {
                                 p.ThrowObject(self.grabbedBy[0].graspUsed, eu);
                             }
@@ -271,8 +281,8 @@ sealed class Plugin : BaseUnityPlugin
                     }
                 }
                 // If player is not being revived, count back up (get more dead)
-                death += 1f / (ticksToDie);
-                UnityEngine.Debug.Log($"Thing is dying with value: {death}");
+                death += 1f / ticksToDie;
+                //UnityEngine.Debug.Log($"Thing is dying with value: {death}");
                 
                 death = Mathf.Clamp(death, -1, 1);
             }
@@ -320,7 +330,7 @@ sealed class Plugin : BaseUnityPlugin
                 for (int i = 0; i < amount; i++) {
                     Vector2 dir = Custom.RotateAroundOrigo(self.firstChunk.Rotation, -40f + 80f * UnityEngine.Random.value);
     
-                    self.room.AddObject(new WaterDrip(self.firstChunk.pos + dir * 30, dir * (3 + 6 * UnityEngine.Random.value), true));
+                    self.room?.AddObject(new WaterDrip(self.firstChunk.pos + dir * 30, dir * (3 + 6 * UnityEngine.Random.value), true));
                 }
             }
             else {
@@ -374,7 +384,12 @@ sealed class Plugin : BaseUnityPlugin
 
     private void DontMoveWhileReviving(On.Player.orig_GraphicsModuleUpdated orig, Player self, bool actuallyViewed, bool eu)
     {
-        orig.Invoke(self, actuallyViewed, eu);
+        // Return early when using proximity revive to avoid visual glitches
+        if (Options.ReviveWithProximity.Value)
+        {
+            orig.Invoke(self, actuallyViewed, eu);
+            return;
+        };
         
         Vector2 pos1 = default, pos2 = default, vel1 = default, vel2 = default;
         Vector2 posH = default, posB = default, velH = default, velB = default;
@@ -393,31 +408,40 @@ sealed class Plugin : BaseUnityPlugin
                 break;
             }
         }
+        
+        /*
+         * Dual's original function uses this invoke in the middle of the function so that the positions and
+         * velocities get stored before the update, which holds the corpse in place. Unfortunately, because
+         * the function is bound at all, when grabbing a corpse you'll begin to slide away with it. It's not
+         * looking like I can fix this without worse glitches occurring, so sorry about that.
+         */
+        orig.Invoke(self, actuallyViewed, eu);
 
         if (pos1 != default) {
             foreach (var grasp in self.grasps) {
                 if (grasp?.grabbed is Player p && CanRevive(self, p)) {
-                    self.bodyChunks[0].pos = posH;
-                    self.bodyChunks[1].pos = posB;
                     self.bodyChunks[0].vel = velH;
                     self.bodyChunks[1].vel = velB;
-
-                    p.bodyChunks[0].pos = pos1;
-                    p.bodyChunks[1].pos = pos2;
+                    self.bodyChunks[0].pos = posH;
+                    self.bodyChunks[1].pos = posB;
+                        
                     p.bodyChunks[0].vel = vel1;
                     p.bodyChunks[1].vel = vel2;
+                    p.bodyChunks[0].pos = pos1;
+                    p.bodyChunks[1].pos = pos2;   
                     break;
                 }
             }
         }
     }
 
-    private void Player_GrabUpdate(ILContext il)
+    /*
+    private void Deprecated_Player_GrabUpdate(ILContext il)
     {
         if (Options.ReviveWithProximity.Value) return;
+
         try {
             ILCursor cursor = new(il);
-
             // Move after num11 check and ModManager.MSC
             cursor.GotoNext(MoveType.After, i => i.MatchStloc(8));
             cursor.Index++;
@@ -432,6 +456,7 @@ sealed class Plugin : BaseUnityPlugin
             Logger.LogError(e);
         }
     }
+    */
 
     private bool UpdateRevive(Player self, int grasp)
     {
@@ -492,12 +517,21 @@ sealed class Plugin : BaseUnityPlugin
     }
 
     private static bool disableHeavyCarry = false;
-    private void FixHeavyCarry(On.Player.orig_GrabUpdate orig, Player self, bool eu)
+    private void Player_GrabUpdate(On.Player.orig_GrabUpdate orig, Player self, bool eu)
     {
         try {
             orig.Invoke(self, eu);
-            if (Options.ReviveWithProximity.Value) return;
             disableHeavyCarry = true;
+            if (!Options.ReviveWithProximity.Value)
+            {
+                for (int i = 0; i < self.grasps.Length; i++)
+                {
+                    if (self.grasps[i] != null)
+                    {
+                        UpdateRevive(self, i);
+                    }
+                }
+            }
         }
         finally {
             disableHeavyCarry = false;
@@ -510,9 +544,6 @@ sealed class Plugin : BaseUnityPlugin
 
     private static void Compression(Player self, int grasp, PlayerData data, Player reviving, PlayerData revivingData, int difference)
     {
-        // Don't perform compressions if using ReviveWithProximity
-        if (Options.ReviveWithProximity.Value) return;
-        
         if (self.slugOnBack != null) {
             self.slugOnBack.interactionLocked = true;
             self.slugOnBack.counter = 0;
@@ -575,8 +606,6 @@ sealed class Plugin : BaseUnityPlugin
         }
     }
     
-    
-    
     private void PlayerGraphics_Update(On.PlayerGraphics.orig_Update orig, PlayerGraphics self)
     {
         orig.Invoke(self);
@@ -588,12 +617,12 @@ sealed class Plugin : BaseUnityPlugin
             self.malnourished = visualDecay;
         }
 
+        // Don't continue with CPR animation if using Proximity
+        if (Options.ReviveWithProximity.Value) return;
+
         if (self.player.grasps.FirstOrDefault(g => g?.grabbed is Player)?.grabbed is not Player reviving) {
             return;
         }
-
-        // Don't continue with CPR animation if using Proximity
-        if (Options.ReviveWithProximity.Value) return;
         
         AnimationStage stage = data.Stage();
 
@@ -645,7 +674,7 @@ sealed class Plugin : BaseUnityPlugin
     {
         orig.Invoke(self);
 
-        // Don't continue with CPR Animation if using Proximity
+        // Exit early if using Proximity Revive
         if (Options.ReviveWithProximity.Value) return;
         
         Player player = ((PlayerGraphics)self.owner).player;

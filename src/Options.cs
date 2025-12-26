@@ -42,7 +42,7 @@ namespace RevivifyMeadowFix
             float optionSpacing = 45;
 
             var author = new OpLabel(20, 600 - 40,
-                "Original by Dual, Proximity Revival by Daimyo, Combination/Update by Auxiar Molkhun", true);
+                "Original by Dual, Proximity Revival by Daimyo, Combination/Update by Auxiar Molkhun");
             var github = new OpLabel(20, 600 - 40 - 40, "github.com/Auxiar/RevivifyMeadowFix");
 
             var d1 = new OpLabel(new(x - 50, y), Vector2.zero, "Revive speed multiplier", FLabelAlignment.Right);
