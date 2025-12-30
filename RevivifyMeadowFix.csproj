@@ -7,76 +7,76 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="0Harmony20">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\0Harmony20.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\0Harmony20.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\utils\PUBLIC-Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\utils\PUBLIC-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\..\..\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\BepInEx.Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Preloader">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\BepInEx.Preloader.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\BepInEx.Preloader.dll</HintPath>
     </Reference>
     <Reference Include="GoKit">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\GoKit.dll</HintPath>
+      <HintPath>..\..\..\Managed\GoKit.dll</HintPath>
     </Reference>
     <Reference Include="HarmonyXInterop">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\HarmonyXInterop.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\HarmonyXInterop.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\plugins\HOOKS-Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\plugins\HOOKS-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\MonoMod.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\MonoMod.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\BepInEx\core\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\..\..\..\BepInEx\core\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Rewired_Core">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\Rewired_Core.dll</HintPath>
+      <HintPath>..\..\..\Managed\Rewired_Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\Unity.Mathematics.dll</HintPath>
+      <HintPath>..\..\..\Managed\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\..\..\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\..\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Rain World\RainWorld_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
 

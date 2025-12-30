@@ -30,11 +30,12 @@ Realizing that there are probably some people who prefer the proximity-based rev
 ### Some notes/known issues:
 * In my testing, Revivify - Meadow Fix has to load **before** Rain Meadow, this means it must go **under** it in the Remix Menu
 * Due to what was causing the break in Meadow support, some of the facial expressions might not function exactly like they did in either mod
+* The Corpse piggyback setting only applies in Singleplayer/Jolly Co-op, as Meadow has its own piggyback rules that don't support corpses  
 
 Other than the mentioned notes, it should be a pretty similar experience regardless of which mod you're more familiar with using. I've done my best to make them as 1:1 as possible, and while I wasn't able to get 100% of the way there, I'd call it about 90-95%. Either way, I hope you enjoy the work that's gone into it!
 
 ### Installation:
-You can find this mod on the [Steam Workshop]() if you'd prefer to install it that way, but if you'd like to install it manually, you can download this repository as a zip file and extract the contents into your `[RainWorldInstallDirectory]/RainWorld_Data/StreamingAssets/mods/` folder. Structure should look something like this, everything not listed here is technically optional! You only need the `plugins` folder, `modinfo.json`, and `thumbnail.png` files inside the folder for the mod for your game to correctly detect the mod:
+You can find this mod on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3632170621) if you'd prefer to install it that way, but if you'd like to install it manually, you can download this repository as a zip file and extract the contents into your `[RainWorldInstallDirectory]/RainWorld_Data/StreamingAssets/mods/` folder. Structure should look something like this, everything not listed here is technically optional! You only need the `plugins` folder, `modinfo.json`, and `thumbnail.png` files inside the folder for the mod for your game to correctly detect the mod:
 ```
 mods/
 ├─ devtools/

@@ -108,22 +108,11 @@ sealed class Plugin : BaseUnityPlugin
         new Hook(typeof(Player).GetMethod("get_Malnourished"), getMalnourished);
         On.Player.CanIPutDeadSlugOnBack += Player_CanIPutDeadSlugOnBack;
         On.Player.GraphicsModuleUpdated += DontMoveWhileReviving;
+        IL.Player.GrabUpdate += Player_GrabUpdate;
+        On.Player.GrabUpdate += FixHeavyCarry;
         On.Player.HeavyCarry += FixHeavyCarry;
         On.SlugcatHand.Update += SlugcatHand_Update;
         
-        // Renamed from FixHeavyCarry to Player_GrabUpdate:
-        On.Player.GrabUpdate += Player_GrabUpdate;
-        
-        /*
-         * Dual's version of the mod used the IL hook for GrabUpdate in order to inject the CPR code to interrupt
-         * the normal corpse grab logic. However, after review with help from ChatGPT, I found that it was ultimately
-         * not needed, and the logic could be moved into the new named, Player_GrabUpdate. The reason for this change
-         * was that when using the proximity-based method, it was actually causing the corpse and player to slide ever
-         * so slightly every frame, which was extremely annoying, especially since his DontMoveWhileReviving function
-         * didn't actually work without major visual glitches as a fix. Moving the logic for this into the normal On
-         * hook solved the sliding issue, making it much more appealing.
-         */
-        //IL.Player.GrabUpdate += Deprecated_Player_GrabUpdate;
 
         /*
          * Dual's version of this hook was breaking with meadow due to meadow loading the player graphics early,
@@ -165,7 +154,7 @@ sealed class Plugin : BaseUnityPlugin
          * reasons, I'm keeping Dual's original implementation as the default, despite it going against meadow's philosophy.
          * I'll include it as a setting in-case players would like to disable it at the very least. When disabled, it only
          * applies when NOT using proximity-based revival, meaning if proximity-based revive is off, then piggybacking is
-         * still allowed
+         * allowed by default
          */
         if (Options.AllowCorpsePiggyback.Value)
         {
@@ -435,11 +424,8 @@ sealed class Plugin : BaseUnityPlugin
         }
     }
 
-    /*
-    private void Deprecated_Player_GrabUpdate(ILContext il)
+    private void Player_GrabUpdate(ILContext il)
     {
-        if (Options.ReviveWithProximity.Value) return;
-
         try {
             ILCursor cursor = new(il);
             // Move after num11 check and ModManager.MSC
@@ -456,10 +442,12 @@ sealed class Plugin : BaseUnityPlugin
             Logger.LogError(e);
         }
     }
-    */
 
     private bool UpdateRevive(Player self, int grasp)
     {
+        // We want to return [false] early if using proximity so that the corpse doesn't slide while being held
+        if (Options.ReviveWithProximity.Value) return false;
+        
         PlayerData data = Data(self);
 
         if (self.grasps[grasp]?.grabbed is not Player reviving || !CanRevive(self, reviving)) {
@@ -517,21 +505,11 @@ sealed class Plugin : BaseUnityPlugin
     }
 
     private static bool disableHeavyCarry = false;
-    private void Player_GrabUpdate(On.Player.orig_GrabUpdate orig, Player self, bool eu)
+    private void FixHeavyCarry(On.Player.orig_GrabUpdate orig, Player self, bool eu)
     {
         try {
             orig.Invoke(self, eu);
             disableHeavyCarry = true;
-            if (!Options.ReviveWithProximity.Value)
-            {
-                for (int i = 0; i < self.grasps.Length; i++)
-                {
-                    if (self.grasps[i] != null)
-                    {
-                        UpdateRevive(self, i);
-                    }
-                }
-            }
         }
         finally {
             disableHeavyCarry = false;

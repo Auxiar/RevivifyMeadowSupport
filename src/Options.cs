@@ -24,8 +24,8 @@ namespace RevivifyMeadowFix
             DeathsUntilExpire = config.Bind("cfgDeathsUntilExpire", 3, new ConfigAcceptableRange<int>(1, 10));
             CorpseExpiryTime = config.Bind("cfgCorpseExpiryTime", 2f, new ConfigAcceptableRange<float>(0.05f, 10f));
             ReviveWithProximity = config.Bind("cfgReviveWithProximity", false);
-            ReviveDistance = config.Bind("cfgReviveDistance", 40f, new ConfigAcceptableRange<float>(1f, 120f));
             AllowCorpsePiggyback = config.Bind("cfgAllowCorpsePiggyback", true);
+            ReviveDistance = config.Bind("cfgReviveDistance", 40f, new ConfigAcceptableRange<float>(1f, 120f));
         }
 
         public override void Initialize()
@@ -60,14 +60,14 @@ namespace RevivifyMeadowFix
             var d5 = new OpLabel(new(x - 50, y -= optionSpacing), Vector2.zero, "Time until bodies expire, in minutes", FLabelAlignment.Right);
             var s5 = new OpFloatSlider(CorpseExpiryTime, new Vector2(x, y - 6), 300, decimalNum: 1);
 
-            var d6 = new OpLabel(new Vector2(x - 50, y -= optionSpacing), Vector2.zero, "Proximity revive distance", FLabelAlignment.Right);
-            var s6 = new OpFloatSlider(ReviveDistance, new Vector2(x, y - 6), 300, decimalNum: 1);
+            var d6 = new OpLabel(new(x - 50, y -= optionSpacing), Vector2.zero, "Revive using Proximity", FLabelAlignment.Right);
+            var s6 = new OpCheckBox(ReviveWithProximity, new Vector2(x, y - 6));
 
-            var d7 = new OpLabel(new(x - 50, y -= optionSpacing), Vector2.zero, "Revive using Proximity", FLabelAlignment.Right);
-            var s7 = new OpCheckBox(ReviveWithProximity, new Vector2(x, y - 6));
+            var d7 = new OpLabel(new(x - 50, y -= optionSpacing), Vector2.zero, "Allow corpse piggyback with proximity", FLabelAlignment.Right);
+            var s7 = new OpCheckBox(AllowCorpsePiggyback, new Vector2(x, y - 6));
 
-            var d8 = new OpLabel(new(x - 50, y -= optionSpacing), Vector2.zero, "Allow corpse piggyback", FLabelAlignment.Right);
-            var s8 = new OpCheckBox(AllowCorpsePiggyback, new Vector2(x, y - 6));
+            var d8 = new OpLabel(new Vector2(x - 50, y -= optionSpacing), Vector2.zero, "Proximity revive distance", FLabelAlignment.Right);
+            var s8 = new OpFloatSlider(ReviveDistance, new Vector2(x, y - 6), 300, decimalNum: 1);
 
             Tabs[0].AddItems(new UIelement[]
             {
