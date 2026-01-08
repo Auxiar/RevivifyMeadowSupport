@@ -1,53 +1,38 @@
-# Fixing Dual's Revivify Mod to Work With Rain Meadow While Adding Daimyo's Proximity-Based Revival as an Option
+# Fixing Dual's Revivify Mod to Work With Rain Meadow While Adding Daimyo's Proximity-Based Revivify as an Option
+~~Phew, what a mouthful.~~
 ___
 
-~~Phew, what a mouthful.~~
+## This mod aims to resolve any conflicts between Rain Meadow, the Rain World Multiplayer Framework (and more) mod and Dual's original CPR-based Revivify mod, and tack on Daimyo's proximity revival as an option.
 
+While attempting to play Rain Meadow, I noticed that Dual's original Revivify mod just didn't work with it. When attempting to CPR my brother or friends, the client would simply not respond. I was also disappointed by the lack of updates over the last two years, but seeing as how it still worked flawlessly in singleplayer, I can understand why it hasn't been. After a point there's only so much more that you can do to a mod before you have to call it done, and even then keeping it updated with the game becomes a hassle, especially if it's functionally unnecessary.
 
-## This mod aims to resolve any conflicts between Rain Meadow, the Rain World Multiplayer Framework (and more) mod and Dual's original CPR-based Revivify mod.
+Eventually, an attempt to make it Meadow-compatible was made by a user of the name Daimyo, and as far as I'm aware, that worked just fine. But unfortunately, they also fundamentally changed the way that the mod worked, switching from a CPR-based revival method to a proximity-based one. That might be fine for some people, but I wasn't happy with it, and it also stopped receiving updates after its initial release.
 
-While attempting to play Rain Meadow, I had an issue where the original Revivify mod by Dual would sometimes work, sometimes not, and was disappointed by that. I was also disappointed by the lack of updates, but ultimately I understand that much. After a point there's only so much more that you can do to a mod before you have to call it done, and even then keeping it updated with the game becomes a hassle.
+So I underwent the process of figuring out how to make Dual's original CPR-based Revivify mod Rain Meadow compatible. Ultimately, it required deprecating a few IL hook functions which were directly conflicting with Meadow, and then restructuring a bit of the mod so that the corpse had authority over when it revived based on the actions (or proximity) of the medic character attempting to revive them. So, Dual's CPR now works in Meadow, and Daimyo's proximity is bundled on as a toggleable remix option.
 
-An attempt to make it Meadow-compatible was made by a user of the name Daimyo, and as far as I'm aware, that worked just fine. But unfortunately, they also fundamentally changed the way that the mod worked, switching from a CPR-based revival method to a proximity-based one. That might be fine for some people, but I wasn't happy with it.
+Because of *how* Dual's Revivify needed to be fixed, it came with a few interesting side effects I didn't see coming until near the end of writing it all up. Since it's purely a client-side mod, it does not require other players to have the mod in order for ***you*** to be revivable. Players without the mod can simply grab hold of your corpse, tap the grab button as if they were performing CPR, and while they might be missing the animation for it, you will begin to revive exactly as expected. Same goes for proximity, as long as you have it enabled, a player only needs to stand next to you for a certain time in order for your character to magically raise from the dead. All settings for proximity, proximity distance, revive speed, etc... are all based on the corpse being revived's settings (or, if you're reviving an NPC/Slugpup, whoever is doing the reviving). I've also decided to allow CPR even if the corpse prefers Proximity as a way to speed up the proximity revive (even though it doesn't take very long by default), since isolating the two different logics was already cumbersome by this point.
+___
+### You can find all the details about the mod on its [Steam Workshop Page](https://steamcommunity.com/sharedfiles/filedetails/?id=3632170621) and can install it from there  
 
-So I underwent the process of figuring out how to make Dual's original CPR-based Revivify mod Rain Meadow compatible. Ultimately, it seems like it's just a few functions revolving around updating the player's sprites, and I believe I've resolved those issues just fine. However, I also noticed that Daimyo hasn't updated their proximity revivify mod in a while either, once again leaving Revivify fans without any updates for current versions.
-
-Realizing that there are probably some people who prefer the proximity-based revival over the CPR version, I took the time to try and combine the two methods in the now Rain Meadow compatible mod. Ultimately it was pretty easy, there was just a few tricky bits surrounding Diamyo's original implementation, as it ***seemed*** like the time to revive was based on your framerate instead of on a constant time-based function, and a few other tweaks and edits from the original as well. I attempted to rectify this and also brought the time to revive a player more in-line with how long it might take to perform CPR on them, so I hope that everyone can appreciate and enjoy these changes, especially online with their friends.
-
-### A full list of any/all changes made in this version of the mod:
-* Now works with Rain Meadow (in all supported modes, load **before** Rain Meadow, or **under** it in the Remix list)
-* Toggle between Daimyo's Proximity-based revival method, or Dual's original CPR-based revival method in the Remix menu
-* Toggle whether or not corpses/comatose slugs can be piggy-backed in the Remix menu (doesn't seem to apply to player corpses in Meadow unfortunately)
-* Daimyo's proximity-based revival has been modified to work as follows:
-  * Revive Speed Multiplier Remix option has been made to function the same as in the original mod (higher is faster)
-  * No longer based on framerate (hopefully, close enough anyways)
-  * Default time to revive tuned to be more in-line with CPR-based time to revive
-  * Leaving the proximity causes the dead to become deader (the longer the corpse is dead, the longer they'll take to revive)
-  * Entering the proximity causes the dead to become more alive until they are considered alive and revive
-  * Corpses should automatically be thrown away once revived
-  * I don't think corpse expiration was implemented on Daimyo's implementation, this has been reimplemented (can be disabled with the Remix setting)
-
-### Some notes/known issues:
-* In my testing, Revivify - Meadow Fix has to load **before** Rain Meadow, this means it must go **under** it in the Remix Menu
-* Due to what was causing the break in Meadow support, some of the facial expressions might not function exactly like they did in either mod
-* The Corpse piggyback setting only applies in Singleplayer/Jolly Co-op, as Meadow has its own piggyback rules that don't support corpses  
-
-Other than the mentioned notes, it should be a pretty similar experience regardless of which mod you're more familiar with using. I've done my best to make them as 1:1 as possible, and while I wasn't able to get 100% of the way there, I'd call it about 90-95%. Either way, I hope you enjoy the work that's gone into it!
-
+Other than the mentioned notes, it should be a pretty similar experience regardless of which mod you're more familiar with using. I'm aware that this mod could be used to cheat in Meadow story or arena lobbies, and I encourage you to consider adding the mod to your BannedMods or HighImpactMods list accessible from the Rain Meadow Remix Menu if you're planning on hosting open servers, and I will communicate with the Rain Meadow team about potentially adding it as a default to one of these lists. Either way, I hope you enjoy the work that's gone into it!
+___
+### If you'd like to leave a review of the mod's features, suggest new features, or submit a bug report, you can do so in this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSckQoZlJm6t8fAAI-6n1Blb13eVsfMALTdLg8wiONRBxIC5Ag/viewform?usp=header). If you don't have an answer for a question then feel free to leave it blank.
+___
 ### Installation:
-You can find this mod on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3632170621) if you'd prefer to install it that way, but if you'd like to install it manually, you can download this repository as a zip file and extract the contents into your `[RainWorldInstallDirectory]/RainWorld_Data/StreamingAssets/mods/` folder. Structure should look something like this, everything not listed here is technically optional! You only need the `plugins` folder, `modinfo.json`, and `thumbnail.png` files inside the folder for the mod for your game to correctly detect the mod:
+You can find this mod on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3632170621) if you'd prefer to install it that way, but if you'd like to install it manually, you can download this repository as a zip file and extract the contents into your `[RainWorldInstallDirectory]/RainWorld_Data/StreamingAssets/mods/` folder, structured like below. Everything not listed here is technically optional! You only need the `plugins` folder, `modinfo.json`, and `thumbnail.png` files inside the folder for the mod for your game to correctly detect the mod:
+
 ```
 mods/
 ├─ devtools/
 ├─ expedition/
 ├─ ...
-└─ Revivify-MeadowFix/
+└─ Revivify-MeadowSupport/
    ├─ plugins/
    │  └─ newest/
-   │     └─ RevivifyMeadowFix.dll
+   │     └─ RevivifyMeadowSupport.dll
    ├─ modinfo.json
    └─ thumbnail.png
 ```
-
-## Apart from the listed changes, the majority of the code is from the original Revivify mod by Dual, source code can be found on [Github](https://github.com/Dual-Iron/revivify/tree/master). Any code from Daimyo's version of the mod came from decompiling the version found on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3396726904). My contributions are minimal at best, and the majority of the credit should go towards Dual and Daimyo.
-## I'm not asking for any recognition or credit for the code or what it attempts to accomplish, I just wanted the original Revivify mod to be compatible with Rain Meadow. I intend to keep the mod updated with game versions, but ideally it should be pretty version agnostic.
+___
+## Apart from the listed changes, the majority of the code is from the [Original Revivify](https://steamcommunity.com/sharedfiles/filedetails/?id=2950327774) mod by Dual, found on [Github](https://github.com/Dual-Iron/revivify). Any code from Daimyo's version of the mod came from decompiling the version found on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3396726904). I added the Meadow support for Dual's CPR method and reorganized/optimized the two methods to work well with each other, but my contributions are minimal at best, and the majority of the credit should go towards Dual and Daimyo for both versions of the original mods. If you like this mod, go like theirs, share the love and all that.
+## I'm not asking for any recognition or credit for the mod despite the work put in, I just wanted the original Revivify mod to be compatible with Rain Meadow. I intend to keep the mod updated with game versions and maybe implement highly requested features as options, we'll see.

@@ -1,11 +1,11 @@
 ﻿{
-  "id": "auxiar.revivifymeadowfix",
-  "name": "Revivify - Meadow Fix",
+  "id": "auxiar.revivifymeadowsupport",
+  "name": "Revivify - Meadow Support",
   "version": "1.0.0",
   "authors": "Dual, Daimyo, & Auxiar Molkhun",
-  "description": "Makes Dual's Original Revivify mod compatible with Rain Meadow and combines Daimyo's Proximity-based Revivify as an option for easy method switching. Art by me (Auxiar)<LINE> source code at: github.com/Auxiar/RevivifyMeadowFix <LINE><LINE> Original Revivify Description: <LINE>Revive slugcat and slugpup corpses, in co-op or not! Lay your friend flat on a solid floor and rhythmically tap GRAB twice per second to resuscitate them. Returning from death's door is an ordeal, so take care of them afterwards.<LINE><LINE>Configurable. [original] code at github.com/Dual-Iron/revivify",
+  "description": "Revive your friends with the power of CPR in Rain World, now with Meadow Support! CPR is performed by tapping grab in a rhythm while holding the corpse you want to revive. You can tell how well you're doing by how much the corpse moves when you do a compression! Also includes an option to use Proximity revive in place of CPR, toggleable in the Remix Menu. With Proximity, you just need to stand within a configurable distance of the corpse to revive them, but you can perform CPR at the same time to speed up the process! <LINE><LINE>This mod is Client-side only, meaning a player needs it installed in order to be revived; however, no one else needs the mod in order to revive you! You can't see them doing it, but if they're doing CPR on you then your corpse should twitch and revive as expected!<LINE><LINE>Based on Dual's Revivify with Daimyo's Proximity Revivify implemented as a toggleable option.<LINE><LINE> Art by me (Auxiar)<LINE> source code at: github.com/Auxiar/RevivifyMeadowSupport",
   "tags": [ "Accessibility", "Creatures", "Game Mechanics" ],
-  "youtube_trailer_id": "2SoDvI7ciUY",
+  "youtube_trailer_id": "",
   "requirements": [],
   "requirements_names": [],
   "checksum_override_version": false
