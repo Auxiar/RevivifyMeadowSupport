@@ -1,9 +1,9 @@
 ﻿{
   "id": "auxiar.revivifymeadowsupport",
   "name": "Revivify - Meadow Support",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "authors": "Dual, Daimyo, & Auxiar Molkhun",
-  "description": "Revive your friends with the power of CPR in Rain World, now with Meadow Support! CPR is performed by tapping grab in a rhythm while holding the corpse you want to revive. You can tell how well you're doing by how much the corpse moves when you do a compression! Also includes an option to use Proximity revive in place of CPR, toggleable in the Remix Menu. With Proximity, you just need to stand within a configurable distance of the corpse to revive them, but you can perform CPR at the same time to speed up the process! <LINE><LINE>This mod is Client-side only, meaning a player needs it installed in order to be revived; however, no one else needs the mod in order to revive you! You can't see them doing it, but if they're doing CPR on you then your corpse should twitch and revive as expected!<LINE><LINE>Based on Dual's Revivify with Daimyo's Proximity Revivify implemented as a toggleable option.<LINE><LINE> Art by me (Auxiar)<LINE> source code at: github.com/Auxiar/RevivifyMeadowSupport",
+  "description": "Revive your friends with the power of CPR in Rain World, now with Meadow Support! Tap grab in a rhythm while holding a corpse to perform CPR — the more the body moves, the better you're doing! Also includes a Proximity revive option, toggleable in the Remix Menu: just stand near a corpse to revive them, or combine both methods to speed things up!<LINE><LINE>Client-side only — a player needs this mod installed to be revived, but no one else needs it to revive you!<LINE><LINE>Based on Dual's Revivify with Daimyo's Proximity Revivify as a toggleable option.<LINE><LINE>Art by me (Auxiar)<LINE>Source code at: github.com/Auxiar/RevivifyMeadowSupport",
   "tags": [ "Accessibility", "Creatures", "Game Mechanics" ],
   "youtube_trailer_id": "",
   "requirements": [],
