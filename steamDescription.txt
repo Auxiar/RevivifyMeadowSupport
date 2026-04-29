@@ -1,0 +1,70 @@
+﻿[h1]Wield the Power to Revive Your Dead Slugcat or Slugpup Friends and Family With Revivify - Now Fully Meadow Compatible![/h1]
+
+[hr][/hr]
+[h2]Version 1.1 just released, featuring more/better options like auto-disable in arena and allowing pups to revive you! And more! See the full notes in the [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/3632170621]change notes[/url]
+
+[hr][/hr]
+[h2]This Mod Supports Two Configurable Methods of Revival:[/h2]
+[list]
+[*][b]CPR[/b] - Perform chest compressions in a steady rhythm to breathe life back into your dead pals!
+
+[*][b]Proximity[/b] - Stand within a configurable distance of your fallen comrades to guide them back to the land of the living!
+[/list]
+
+[hr][/hr]
+This mod combines [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2950327774]Revivify by Dual[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3396726904]Revivify Meadow by Daimyo[/url] into a singular mod while making the original CPR-based method compatible with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3388224007]Rain Meadow[/url]. Daimyo's version changed revival to proximity-based, so I took it upon myself to fix the CPR method to work with Meadow while keeping the proximity option as a toggleable alternative.
+
+[h3]If you'd like to provide a review, submit a feature request or a bug report, you can use this [url=https://forms.gle/dTKXFZKjMjAH7LKQ9]Google Form[/url].[/h3]
+
+[hr][/hr]
+[h3]Mod Features:[/h3]
+[list]
+	[*]Fully compatible with Rain Meadow (load [b]after[/b] or [b]above[/b] Rain Meadow for the smoothest experience)
+
+[list]
+[*]Other players do [b]not[/b] need the mod installed for [b]you[/b] to be revived in Meadow. They can revive you without it, though they won't see visual feedback. However, you [b]cannot[/b] revive online players without the mod, regardless of how hard you try.
+[/list]
+
+	[*]Toggle between proximity-based or CPR-based revival in the Remix menu. With CPR, you must receive compressions to revive. With proximity, someone just needs to stand next to you. CPR also speeds up proximity revival!
+
+    [*]Custom Remix options to adjust revival difficulty, exhaustion mechanics, and more.
+[/list]
+
+[hr][/hr]
+[h3]How to Perform CPR:[/h3]
+[list]
+[*]Lay the corpse on a solid surface
+
+[*]Hold the corpse - your slug will assume the CPR position (standing around their neck)
+
+[*]Press grab to compress - stronger compressions revive faster
+
+[*]Time your compressions for maximum effectiveness (compress after you fully finish the animation of the last one)
+
+[*]If you lose rhythm, pause and restart!
+[/list]
+
+[hr][/hr]
+[h3]Remix Options:[/h3]
+They have descriptions now! Hover over them in-game to see their descriptions at the bottom of your screen.
+
+[hr][/hr]
+[h3]Known Issues:[/h3]
+[list]
+	[*]Load order doesn't matter much, but loading after or above Rain Meadow seems smoother
+
+    [*]Corpse piggybacking only works/matters in Singleplayer/Jolly Co-op
+
+    [*]Exhaustion visuals don't sync in Meadow, so other players won't see you become pale
+
+[*]This mod can be used to cheat in public Meadow lobbies - [b]add it to your BannedMods or HighImpactMods lists[/b] if you're worried about others using it to ruin your public lobbies
+[/list]
+
+[h3]Like this mod? You might like [url=https://steamcommunity.com/workshop/filedetails/?id=3711589990]Revivify Omni by Wonky[/url]! the mods achieve the same goal, but theirs does some things mine doesn't and vice versa. Give it a look!
+
+[hr][/hr]
+[h2]The majority of the code comes from Dual's original [url=https://github.com/Dual-Iron/revivify/tree/master]Revivify mod on Github[/url], with proximity functionality from Daimyo's version. I've fixed the CPR method to work with Meadow and reorganized both to work together in one mod. Full credit to Dual and Daimyo for their respective code.[/h2]
+
+[h2]I'm not asking for recognition — I just wanted the original Revivify compatible with Rain Meadow. I'll keep it updated with game versions and implement highly requested features when possible.[/h2]
+
+Source code available on [url=https://github.com/Auxiar/RevivifyMeadowFix]Github[/url], thumbnail art by me

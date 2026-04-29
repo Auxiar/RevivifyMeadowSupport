@@ -4,7 +4,7 @@ sealed class PlayerData
 {
     public bool exhausted = false;
 
-    public int animTime;
+    public int animTime = -1; // Default to unprepared - because we usually start out that way
     public float compressionDepth; // serves as an indicator for how effective the compression was
 
     public int expireTime;
@@ -14,7 +14,7 @@ sealed class PlayerData
     public int deaths;
     public float deathTime; // Ranges from -1 to 1 and starts at 0
 
-    public bool Expired => expireTime > Options.CorpseExpiryTime.Value * 60 * 40;
+    public bool Expired => Options.CorpseExpiryTime.Value > 0 && expireTime > Options.CorpseExpiryTime.Value * 60 * 40;
 
     public void Unprepared() => animTime = -1;
     public void PreparedToGiveCpr() => animTime = 0;
